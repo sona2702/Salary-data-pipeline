@@ -1,0 +1,10 @@
+
+CREATE OR REPLACE PIPE csv_pipe AUTO_INGEST=TRUE AS
+COPY INTO raw_csv_salary
+FROM @s3_stage/DataScience_salaries_2025.csv
+FILE_FORMAT = (TYPE=CSV SKIP_HEADER=1 FIELD_OPTIONALLY_ENCLOSED_BY='"');
+
+CREATE OR REPLACE PIPE json_pipe AUTO_INGEST=TRUE AS
+COPY INTO raw_json_salary
+FROM @s3_stage/DataScience_salaries_2025.json
+FILE_FORMAT = (TYPE=JSON);
